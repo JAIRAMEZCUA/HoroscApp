@@ -53,7 +53,7 @@ class PalmistryFragment : Fragment() {
     }
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext()) //Instancia de la camaera
 
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -61,15 +61,15 @@ class PalmistryFragment : Fragment() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider) //Hacemos el link con la camerax y el preview de la vista
                 }
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA //se define la camara que abrira x defecto
 
             try{
                 cameraProvider.unbindAll()
 
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview)
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview) //enganchamos la camara con el ciclo de vida del fragment
             }catch (e:Exception){
                 Log.e("aris", "Algo petó ${e.message}")
             }
